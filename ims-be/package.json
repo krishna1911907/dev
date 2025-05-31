@@ -1,0 +1,19 @@
+{
+  "name": "krishna",
+  "version": "1.0.0",
+  "description": "IPL Managment System",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  
+  },
+  "keywords": [
+    "IPL"
+  ],
+  "author": "Krishna",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
