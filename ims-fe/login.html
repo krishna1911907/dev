@@ -1,7 +1,9 @@
-<!DOCTYPE html>
+<html>
 
 <head>
-    <title>Signup</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
     <style>
         body {
             font-family: Arial;
@@ -56,48 +58,58 @@
         }*/
     </style>
     <script>
-        function create() {
-            const name = document.getElementById("NAME").value
+        async function login() {
+
             const email = document.getElementById("EMAIL").value
             const password = document.getElementById("PASSWORD").value
-            const phone = document.getElementById("PHONE").value
-            fetch("http://127.0.0.1:8001/users", {
+
+            const response= await fetch("http://127.0.0.1:8001/token", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    name: name,
+
                     email: email,
                     password: password,
-                    phone: phone
+
                 })
-            }).then((res) => res.json()).then((result) => {
-                const res = JSON.stringify(result)
-                document.getElementById("RESPONSE").innerHTML = res
             })
+                const data=await response.json()
+            if(response.status===200){
+            
+                localStorage.setItem("token",data.token)
+                window.location.href="dashboard.html"
+            }
+            else{
+                
+                const error=JSON.stringify(data)
+                document.getElementById("RESPONSE").innerHTML=error
+            }
+            
+            
+            
+
         }
     </script>
 </head>
 
-
-
 <body>
-
-
-
     <div class="form-box">
-        Name:<input id="NAME" type="text" placeholder="Enter Name" /><br><br>
+
         Email:<input id="EMAIL" type="text" placeholder="Enter Email" /><br><br>
         Password: <input id="PASSWORD" type="password" placeholder="Enter Password" /><br><br>
-        Mobile No.: <input id="PHONE" type="number" placeholder="Enter Mobile Number" /><br><br>
-        <button onclick="create()">Submit</button>
+
+        <button onclick="login()">Submit</button>
         <p id="RESPONSE">
+            Don't Have An Account ?<br>
+
+
+            <a href="signup.html">signup</a>
 
         </p>
 
     </div>
-
 
 </body>
 
